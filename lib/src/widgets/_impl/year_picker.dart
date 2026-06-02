@@ -120,19 +120,19 @@ class _YearPickerState extends State<YearPicker> {
     }
 
     BoxDecoration? decoration;
+    final borderRadius = widget.config.yearBorderRadius ??
+        BorderRadius.circular(decorationHeight / 2);
     if (isSelected) {
       decoration = BoxDecoration(
         color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        borderRadius: widget.config.yearBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
+        borderRadius: borderRadius,
       );
     } else if (isCurrentYear && !isDisabled) {
       decoration = BoxDecoration(
         border: Border.all(
           color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         ),
-        borderRadius: widget.config.yearBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
+        borderRadius: borderRadius,
       );
     }
 
@@ -169,6 +169,7 @@ class _YearPickerState extends State<YearPicker> {
     } else {
       yearItem = InkWell(
         key: ValueKey<int>(year),
+        borderRadius: borderRadius * 0.5,
         onTap: () => widget.onChanged(
           DateTime(
             year,

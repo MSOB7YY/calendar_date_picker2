@@ -136,24 +136,25 @@ class _MonthPickerState extends State<_MonthPicker> {
     }
 
     BoxDecoration? decoration;
+    final borderRadius = widget.config.monthBorderRadius ??
+        BorderRadius.circular(decorationHeight / 2);
     if (isSelected) {
       decoration = BoxDecoration(
         color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
-        borderRadius: widget.config.monthBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
+        borderRadius: borderRadius,
       );
     } else if (isCurrentMonth && isMonthSelectable) {
       decoration = BoxDecoration(
         border: Border.all(
           color: widget.config.selectedDayHighlightColor ?? colorScheme.primary,
         ),
-        borderRadius: widget.config.monthBorderRadius ??
-            BorderRadius.circular(decorationHeight / 2),
+        borderRadius: borderRadius,
       );
     }
 
     Widget monthItem = widget.config.monthBuilder?.call(
           month: month,
+          date: DateTime(widget.initialMonth.year, month),
           textStyle: itemStyle,
           decoration: decoration,
           isSelected: isSelected,
@@ -186,6 +187,7 @@ class _MonthPickerState extends State<_MonthPicker> {
     } else {
       monthItem = InkWell(
         key: ValueKey<int>(month),
+        borderRadius: borderRadius * 0.5,
         onTap: !isMonthSelectable
             ? null
             : () {

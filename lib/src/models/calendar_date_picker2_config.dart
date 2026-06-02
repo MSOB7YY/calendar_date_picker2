@@ -69,6 +69,7 @@ typedef YearBuilder = Widget? Function({
 /// Custom builder for the month widget
 typedef MonthBuilder = Widget? Function({
   required int month,
+  required DateTime date,
   TextStyle? textStyle,
   BoxDecoration? decoration,
   bool? isSelected,
@@ -85,6 +86,7 @@ typedef ScrollViewMonthYearBuilder = Widget Function(DateTime monthDate);
 typedef ModePickerBuilder = Widget? Function({
   required CalendarDatePicker2Mode viewMode,
   required DateTime monthDate,
+  required VoidCallback? onTap,
   bool? isMonthPicker,
 });
 
